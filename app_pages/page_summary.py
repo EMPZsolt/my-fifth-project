@@ -8,7 +8,7 @@ def page_summary_body():
 
     st.info(
         f"**General Information**\n\n"
-        f"Powdery mildew is a common fungal disease affecting cherry trees, caused by *Podosphaera clandestina*."
+        f"Powdery mildew is a common fungal disease affecting cherry trees, caused by Podosphaera clandestina."
         f" Infected leaves develop a layer of white powdery growth on their surfaces, leading to reduced photosynthesis and crop yield."
         f" This project aims to differentiate between healthy and infected leaves using visual analysis techniques."
         f"\n\n"
