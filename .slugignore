@@ -2,7 +2,6 @@ inputs/cherryleaves_database/cherry-leaves/test/healthy/*
 inputs/cherryleaves_database/cherry-leaves/test/powdery_mildew/*
 inputs/cherryleaves_database/cherry-leaves/train/healthy/*
 inputs/cherryleaves_database/cherry-leaves/train/powdery_mildew/*
-readme_images/*
 README.md
 .gitpod.yml
 app_pages/__pycache__/*
