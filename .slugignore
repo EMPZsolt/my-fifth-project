@@ -4,6 +4,13 @@ inputs/cherryleaves_database/cherry-leaves/train/healthy/*
 inputs/cherryleaves_database/cherry-leaves/train/powdery_mildew/*
 jupyter_notebooks/*
 outputs/v2/*
+outputs/v3/*
+outputs/v4/*
+outputs/v5/*
+outputs/v6/*
+outputs/v7/*
+outputs/v8/*
+outputs/v9/*
 README.md
 .gitpod.yml
 app_pages/__pycache__/*
