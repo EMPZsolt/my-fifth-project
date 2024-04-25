@@ -4,19 +4,20 @@
 
 
 ## Table of Contents
-1. [Dataset Content](#dataset-content)
-2. [Business Requirements](#business-requirements)
-3. [Hypothesis and validation](#hypothesis-and-validation)
-4. [Rationale for the model](#the-rationale-for-the-model)
-5. [Trial and error](#trial-and-error)
-6. [Implementation of the Business Requirements](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
-7. [ML Business case](#ml-business-case)
-8. [Dashboard design](#dashboard-design-streamlit-app-user-interface)
-9. [CRISP DM Process](#the-process-of-cross-industry-standard-process-for-data-mining)
-10. [Bugs](#bugs)
-11. [Deployment](#deployment)
-12. [Technologies used](#technologies-used)
-13. [Credits](#credits)
+- [Dataset Content](#dataset-content)
+- [Business Requirements](#business-requirements)
+- [Hypothesis and validation](#hypothesis-and-validation)
+- [Rationale for the model](#the-rationale-for-the-model)
+- [Trial and error](#trial-and-error)
+- [Implementation of the Business Requirements](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+- [ML Business case](#ml-business-case)
+- [Dashboard design](#dashboard-design-streamlit-app-user-interface)
+- [CRISP DM Process](#the-process-of-cross-industry-standard-process-for-data-mining)
+- [Bugs](#bugs)
+- [Deployment](#deployment)
+- [Technologies used](#technologies-used)
+- [Credits](#credits)
+- [Acknowledgements](#acknowledgements)
 
 
 ## Dataset Content
@@ -56,28 +57,47 @@ By addressing these objectives, the client aims to optimize the inspection proce
 ## Dashboard Design
 
 ### Page 1: Quick Project Summary
-Quick project summary
-General Information
-Malaria is a parasitic infection transmitted by the bite of infected female Anopheles mosquitoes.
-A blood smear sample is collected, mixed with a reagent and examined in the microscope. Visual criteria are used to detect malaria parasites.
-According to WHO, in 2019, there were an estimated 229 million cases of malaria worldwide and an estimated 409 thousand deaths due to this diseease. Children <5 years are the most vulnerable group, accounting for 67% (274 thousand) of all malaria deaths worldwide in 2019.
-Project Dataset
-The available dataset contains 5643 out of +27 thousand images taken from blood smear workflow (when a drop of blood it taken on a glass slide) of cells that are parasitized or uninfected with malaria.
-Link to addition ainformation
-Business requirements
-The client is interested to have a study to visually differentiate between a parasite contained and uninfected cell.
-The client is interested to tell whether a given cell contains malaria parasite or not.
-### Page 2: Cells Visualizer
-It will answer business requirement 1
-Checkbox 1 - Difference between average and variability image
-Checkbox 2 - Differences between average parasitized and average uninfected cells
-Checkbox 3 - Image Montage
-### Page 3: Malaria Detector
-Business requirement 2 information - "The client is interested to tell whether a given cell contains malaria parasite or not."
-Link to download a set of parasite contained and uninfected cell images for live prediction.
-User Interface with a file uploader widget. The user should upload multiple malaria cell image. It will display the image and a prediction statement, indicating if the cell is infected or not with malaria and the probability associated with this statement.
-Table with image name and prediction results.
-Download button to download table.
+
+#### Summary Page:
+This page offers a rapid overview of the project and its goals. It encompasses general details regarding powdery mildew in cherry trees and the visual indicators utilized for identifying infected leaves. Additionally, it provides a link to the project README file.
+
+#### General Information:
+Powdery mildew is a parasitic fungal disease caused by Podosphaera clandestina in cherry trees. As the fungus proliferates, it forms a layer of mildew consisting of numerous spores atop the leaves. This disease poses a significant threat to new growth, hindering plant development and potentially affecting fruit, thereby leading to direct crop losses. Visual cues for detecting infected leaves include light-green circular lesions on leaf surfaces, progressing to the development of a subtle white cotton-like growth on both leaf surfaces and fruits, ultimately reducing yield and quality.
+
+#### Project Dataset:
+The dataset provided by Farmy & Foody comprises 4208 featured photos of single cherry leaves set against a neutral background. These leaves are either healthy or afflicted by cherry powdery mildew.
+
+#### Business Requirements:
+- The client seeks to conduct a study aimed at visually distinguishing between leaves containing parasites and those that are uninfected.
+- The client desires to determine whether a given leaf contains a powdery mildew parasite or not.
+
+### Page 2: Leaf Visualizer
+
+#### Answers business requirements 1
+
+This page facilitates the visualization of cherry leaves, emphasizing the disparities between average healthy leaves and those infected with powdery mildew. It addresses the following:
+
+#### Checkbox 1 - Difference between average and variability image:
+Allows users to compare the average appearance of cherry leaves with the variability across multiple images.
+
+#### Checkbox 2 - Differences between average powdery mildew-infected and average healthy leaves:
+Enables users to observe the distinctions between the average characteristics of cherry leaves affected by powdery mildew and those that are healthy.
+
+#### Checkbox 3 - Image Montage:
+Provides clients with an image montage feature, offering an array of randomly selected images showcasing either healthy or powdery mildew-infected cherry leaves.
+
+### Page 3: Powdery Mildew Detector
+
+#### Answers business requirements 2
+
+This page is dedicated to detecting powdery mildew in cherry leaves. It fulfills the following objectives:
+- User Interface with File Uploader Widget:
+    - Allows users to upload multiple cherry leaf images for live prediction.
+- Powdery Mildew Detection:
+    - Processes the uploaded images using a machine learning model to predict whether the leaves are healthy or infected with powdery mildew.
+- Prediction Statement and Probability:
+    - Displays the prediction statement indicating if the leaf is infected or not with powdery mildew, along with the associated probability.
+
 ### Page 4: Project Hypothesis and Validation
 Bloack for each project hypothesis, describe the conclusion and how you validated.
 ### Page 5: ML Performance Metrics

@@ -49,17 +49,17 @@ def load_model_and_predict(my_image, version):
     Load and perform ML prediction over live images
     """
 
-    model = load_model(f"outputs/{version}/malaria_detector_model.h5")
+    model = load_model(f"outputs/{version}/powdery_mildew_detector_model_SGD+.h5")
 
     pred_proba = model.predict(my_image)[0, 0]
 
-    target_map = {v: k for k, v in {'Parasitized': 0, 'Uninfected': 1}.items()}
+    target_map = {v: k for k, v in {'Healthy': 0, 'Infected': 1}.items()}
     pred_class = target_map[pred_proba > 0.5]
     if pred_class == target_map[0]:
         pred_proba = 1 - pred_proba
 
     st.write(
-        f"The predictive analysis indicates the sample cell is "
-        f"**{pred_class.lower()}** with malaria.")
+        f"The predictive analysis indicates the sample cherry leaf is "
+        f"**{pred_class.lower()}** with powdery mildew.")
 
     return pred_proba, pred_class
