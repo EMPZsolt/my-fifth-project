@@ -9,17 +9,18 @@ def page_summary_body():
     st.info(
         f"**General Information**\n\n"
         f"Powdery mildew is a common fungal disease affecting cherry trees, caused by Podosphaera clandestina."
-        f" Infected leaves develop a layer of white powdery growth on their surfaces, leading to reduced photosynthesis and crop yield."
-        f" This project aims to differentiate between healthy and infected leaves using visual analysis techniques."
+        f"Infected leaves develop a layer of white powdery growth on their surfaces, leading to reduced"
+        f"photosynthesis and crop yield."
+        f"This project aims to differentiate between healthy and infected leaves using visual analysis techniques."
         f"\n\n"
         f"Visual criteria for detecting infected leaves include:\n\n"
-        f"* Light-green circular lesions on leaf surfaces, evolving into a subtle white cotton-like growth."
+        f"*Light-green circular lesions on leaf surfaces, evolving into a subtle white cotton-like growth."
         f"\n\n")
 
     st.warning(
         f"**Project Dataset**\n\n"
         f"The dataset comprises 2104 images of healthy cherry leaves and 2104 images of leaves affected by powdery mildew."
-        f" Each leaf was individually photographed against a neutral background."
+        f"Each leaf was individually photographed against a neutral background."
         )
 
     st.success(
