@@ -2,7 +2,7 @@
 
 # Cherry Leaves Powdery Mildew Detector
 
-
+[Live Powdery Mildew Detector Website](https://my-fifth-project-89e0de1c12e6.herokuapp.com/)
 ## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
@@ -79,7 +79,36 @@ By addressing these objectives, the client aims to optimize the inspection proce
 
 
 ## ML Business Case
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+
+Cherry Leaves Powdery Mildew Detector
+
+- **Introduction**:
+The aim of this project is to develop a machine learning model capable of accurately predicting whether a cherry leaf is healthy or infected with powdery mildew. This classification task is crucial for farmers to efficiently identify and manage diseased plants, ultimately ensuring the health and productivity of their cherry crops.
+
+- **Problem Statement**:
+Farmy & Foody company is facing challenges with the current manual inspection method for detecting powdery mildew in cherry leaves. The process is labor-intensive, time-consuming, and prone to human error, leading to inefficient disease management practices. By leveraging machine learning technology, we aim to provide a faster and more reliable detection solution.
+
+- **Objective**:
+The primary objective is to develop a machine learning model that can accurately classify cherry leaves as healthy or infected with powdery mildew based on provided image data. The model should achieve an accuracy of 97% or above on the test set to ensure its effectiveness in real-world applications.
+
+- **Success Metrics**:
+Achieve an accuracy of 97% or higher on the test set.
+Provide a binary classification output indicating whether a cherry leaf is healthy or infected with powdery mildew, along with associated probability scores.
+
+- **Heuristics**:
+Current detection methods rely on manual visual inspection, leading to inefficiencies and inaccuracies.
+The training data consist of a dataset containing 4,208 images of cherry leaves, which will be utilized to train and validate the machine learning model.
+Infected leaves are expected to exhibit distinct visual markings that differentiate them from healthy leaves.
+
+- **Validation Approach**:
+Conduct research on powdery mildew to understand its characteristics and visual cues.
+Analyze average images and variability for each class (healthy and infected) to identify key features.
+Build and train multiple machine learning models using different hyperparameters, such as image reshaping, regularization techniques, batch normalization, and activation functions (e.g., sigmoid and SoftMax).
+Evaluate and compare the performance of the trained models using metrics such as accuracy, precision, recall, and F1-score.
+Validate the hypothesis by comparing the average characteristics of healthy and infected cherry leaves and assessing the model's ability to accurately classify them.
+
+- **Conclusion**:
+By developing an accurate and efficient machine learning model for powdery mildew detection in cherry leaves, Farmy & Foody company can streamline their disease management practices, minimize crop losses, and improve overall farm productivity. The successful implementation of the model will empower farmers with a reliable tool for early disease detection and intervention, ultimately contributing to the sustainability and profitability of cherry cultivation.
 
 ## Conclusion and Potential Course of Actions
 
@@ -91,7 +120,7 @@ Our hypothesis suggested that infected cherry leaves would display unique visual
 
 **Hypothesis 2** (Does SoftMax outperform sigmoid as the CNN output layer activation function?):
 
-This hypothesis aimed to compare SoftMax and sigmoid activation functions for the CNN output layer. After multiple iterations and evaluations, we found that the model consistently performed better with the Softmax activation function. So this is the best choice for our powdery mildew detection model.
+This hypothesis aimed to compare SoftMax and sigmoid activation functions for the CNN output layer. After multiple iterations and evaluations, I found that the model consistently performed better with the Softmax activation function. So this is the best choice for our powdery mildew detection model.
 
 Some potential actions can be considered:
 
@@ -123,7 +152,6 @@ The dataset provided by Farmy & Foody comprises 4208 featured photos of single c
 ### Page 2: Leaf Visualizer
 
 #### Answers business requirements 1
-
 This page facilitates the visualization of cherry leaves, emphasizing the disparities between average healthy leaves and those infected with powdery mildew. It addresses the following:
 
 #### Checkbox 1 - Difference between average and variability image:
@@ -138,7 +166,6 @@ Provides clients with an image montage feature, offering an array of randomly se
 ### Page 3: Powdery Mildew Detector
 
 #### Answers business requirements 2
-
 This page is dedicated to detecting powdery mildew in cherry leaves. It fulfills the following objectives:
 - User Interface with File Uploader Widget:
     - Allows users to upload multiple cherry leaf images for live prediction.
@@ -148,11 +175,40 @@ This page is dedicated to detecting powdery mildew in cherry leaves. It fulfills
     - Displays the prediction statement indicating if the leaf is infected or not with powdery mildew, along with the associated probability.
 
 ### Page 4: Project Hypothesis and Validation
-Bloack for each project hypothesis, describe the conclusion and how you validated.
+This section delves into the hypotheses formulated during the project's inception and outlines the validation process conducted to test these hypotheses.
+
+**Hypothesis 1**: Distinguishable Features of Infected Cherry Leaves
+We hypothesized that cherry leaves affected by powdery mildew would exhibit distinguishable visual characteristics compared to healthy leaves. Initial observations suggested that infected leaves might display light-green circular lesions and a subtle white cotton-like growth, serving as distinctive markers for powdery mildew infection.
+
+- **Validation**: The validation process involved a comprehensive analysis of images depicting healthy and infected cherry leaves. By examining average images and variability within each class, we aimed to identify visual differences that could aid in the classification process. The validation results supported our hypothesis, confirming that infected leaves indeed exhibited unique features distinguishable from healthy leaves.
+
+**Hypothesis 2**: Effectiveness of Activation Functions in Model Performance
+We hypothesized that the choice of activation function in the convolutional neural network model would significantly impact its performance in detecting powdery mildew in cherry leaves. Specifically, we aimed to compare the performance of the Softmax and Sigmoid activation functions in classifying leaf images.
+
+- **Validation**: To validate this hypothesis, we trained and evaluated multiple CNN models using different activation functions. By analyzing model performance metrics such as accuracy, precision, recall, and F1-score, we assessed the effectiveness of each activation function. The validation results indicated that the Softmax activation function outperformed the Sigmoid function in terms of classification accuracy and overall model performance.
+
+Overall, the validation of these hypotheses provided valuable insights into the factors influencing the effectiveness of the powdery mildew detection model. By confirming the distinguishable features of infected cherry leaves and identifying the optimal activation function for the CNN model, we gained confidence in the model's ability to accurately detect powdery mildew in cherry trees.
+
 ### Page 5: ML Performance Metrics
-Label Frequencies for Train, Validation and Test Sets
-Model History - Accuracy and Losses
-Model evaluation result
+1. **Images distribution**(Bar chart):
+Analyze the distribution of label frequencies across the training, validation, and test datasets to ensure a balanced representation of healthy and infected cherry leaves. Understanding the class distribution is essential for assessing model performance and identifying potential biases.
+
+2. **Data Allocation Across Train, Validation, and Test Sets**(Pie chart):
+Provide insights into the percentage distribution of data among the training, validation, and test sets. A clear understanding of data partitioning helps in assessing the adequacy of training samples and the generalization capability of the model.
+
+#### Model Performance
+ 3. **Classification Report**:
+ The classification report provides a concise summary of the model's performance metrics, including accuracy, precision, recall, and F1-score. It offers insights into the model's ability to correctly classify instances, considering both individual class performance and overall effectiveness. This comprehensive evaluation aids stakeholders in assessing the model's suitability for real-world deployment and identifying areas for improvement.
+
+4. **Confusion Matrix**:
+Display the confusion matrix to assess the model's classification performance by comparing predicted labels with true labels. The confusion matrix provides valuable insights into the model's ability to correctly classify healthy and infected cherry leaves, including true positives, true negatives, false positives, and false negatives.
+
+5. **Model History - Accuracy and Losses of LSTM Model**:
+Visualize the training history of the LSTM (Long Short-Term Memory) model by plotting accuracy and loss metrics across epochs. Understanding the model's training progress over time helps in identifying convergence, overfitting, or underfitting issues and fine-tuning hyperparameters accordingly.
+
+6. **Model Evaluation Result on Test Set**:
+Present a comprehensive evaluation of the trained model on the test set, including accuracy, precision, recall, F1-score, and other relevant performance metrics. Provide a detailed analysis of the model's strengths, weaknesses, and areas for improvement based on its performance on unseen data.
+By incorporating these ML performance metrics and evaluation results into the project report, stakeholders gain a deeper understanding of the model's effectiveness, reliability, and suitability for real-world deployment in detecting powdery mildew in cherry leaves.
 
 
 ## CRISP DM Process
@@ -235,6 +291,7 @@ To clone the repository, perform the following steps:
 ### Code
 - The layout I used for this project is provided by [CodeInstitute](https://github.com/Code-Institute-Solutions/milestone-project-mildew-detection-in-cherry-leaves).
 - The Streamlit dashboard pages, and the Jupyter Notebooks are based on Code Institute's Malaria Detector Walkthrough Project, which I used as a starting point for this project.
+- I drew inspiration from [Claudia Cifaldi's Readme](https://github.com/cla-cif/Cherry-Powdery-Mildew-Detector/blob/main/README.md) file while crafting my own readme document.
 
 
 ## Acknowledgements
