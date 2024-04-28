@@ -6,11 +6,10 @@
 ## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
-- [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [Hypothesis and validation](#hypothesis-and-validation)
 - [Rationale for the model](#the-rationale-for-the-model)
 - [Trial and error](#trial-and-error)
-- [Implementation of the Business Requirements](#the-rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
+- [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [ML Business case](#ml-business-case)
 - [Conclusion and Potential Course of Actions](#conclusion-and-potential-course-of-actions)
 - [Dashboard design](#dashboard-design-streamlit-app-user-interface)
@@ -57,6 +56,83 @@ The dataset provided by Farmy & Foods comprises cherry leaf images, forming the 
 
 By addressing these objectives, the client aims to optimize the inspection process, enhance crop management practices, and ultimately improve the quality and yield of their cherry plantation crop.
 
+## Hypothesis and validation
+### Hypothesis 1: Infected Leaves have Clear Marks Distinguishing them from Healthy Leaves
+We believe that cherry leaves affected by powdery mildew show clear visual traits, primarily characterized by light-green circular lesions and the subsequent development of a subtle white cotton-like growth in the infected area. This hypothesis aims to translate these observable traits into machine-learning terms, preparing images for optimal feature extraction and model training.
+
+- Understanding the Problem and Mathematical Functions:<br>
+In dealing with image datasets, it is crucial to normalize the images before training a neural network. This normalization ensures consistent results for new test images and facilitates transfer learning. Calculating the mean and standard deviation of the dataset involves considering four dimensions of an image (batch size, number of channels, height, and width). However, calculating these parameters can be challenging, as the entire dataset cannot be loaded into memory at once. Instead, batches of images are loaded sequentially for computation.
+
+- Observation:<br>
+Visual analysis, including image montages and comparisons between average and variability images, reveals notable differences between healthy and infected cherry leaves. 
+![Example for healthy cherry leaves](/readme_images/healthy_img.png)
+Infected leaves tend to display more prominent white stripes in the center, indicating the presence of powdery mildew.
+![Example for infected cherry leaves with powdery mildew](/readme_images/powdery_mildew_img.png)
+However, the comparison between average healthy and infected leaves shows less intuitive differences.
+![Differences between average healthy and average infected leaves](/outputs/v1/avg_diff.png)
+
+**Attention!**<br>
+Furthermore, it's worth noting that in the data visualization section, I used images of different sizes (200x200 image size compared to the original 256x256). This was done to facilitate the online uploading process of the application and to comply with upload size limits.
+
+### Hypothesis 2: Mathematical formulas comparison
+The hypothesis revolves around comparing the performance of two different mathematical functions, namely softmax and sigmoid, as activation functions for the CNN output layer. The hypothesis posits that softmax outperforms sigmoid in terms of model accuracy and effectiveness. To understand the problem, it's crucial to comprehend the nature of the classification task at hand. The model aims to classify cherry leaves into one of two categories: healthy or infected with powdery mildew. This problem can be viewed as either binary classification (healthy or not healthy) or multi-class classification (multiple classes, in this case, two: healthy or infected). The sigmoid function is typically used for binary classification tasks, where it squashes the output values to a range between 0 and 1, effectively assigning probabilities to each class. However, it suffers from drawbacks such as vanishing gradients during backpropagation, which can hinder learning. On the other hand, the softmax function is suitable for multi-class classification, as it normalizes the output values into a probability distribution over all classes, ensuring that the sum of probabilities adds up to 1. This facilitates a more robust learning process.
+
+- Observation:<br>
+To validate the hypothesis, identical models were trained, with the only difference being the activation function used in the output layer. Learning curves were plotted to observe the model's performance over time (epochs). It was noted that the model trained with softmax showed less overfitting and a more consistent learning rate compared to the model trained with sigmoid.
+![Softmax Accuracy](/outputs/v1/model_training_acc.png)
+Softmax Accuracy
+![Softmax Losses](/outputs/v1/model_training_losses.png)
+Softmax Losses
+![Sigmoid Accuracy](/outputs/v1/sigmoid_model_training_acc.png)
+Sigmoid Accuracy
+![Sigmoid Losses](/outputs/v1/sigmoid_model_training_losses.png)
+Sigmoid Losses
+
+- Conclusion:<br>
+Based on the results, the hypothesis was validated, with the softmax function demonstrating superior performance in classifying cherry leaves as healthy or infected with powdery mildew. This highlights the importance of selecting the appropriate activation function based on the nature of the classification problem at hand.
+
+## Rationale for the model
+
+The model architecture consists of a Sequential model with multiple convolutional layers followed by max-pooling layers for downsampling and a fully connected layer for feature aggregation. The model concludes with an output layer employing the softmax activation function for classification.
+
+**Objective**:<br>
+The goal of this model design is to effectively extract hierarchical features from input images and classify them into two categories (in this case, healthy or infected cherry leaves) with high accuracy.
+
+**Model Architecture and Layers**:<br>
+Input Layer: The model begins with a convolutional layer with 32 filters of size 3x3 and ReLU activation, followed by max-pooling to downsample the feature maps.
+Hidden Layers: Subsequent layers include additional convolutional layers with increasing filter sizes (32 and 64) and max-pooling operations.
+Flattening: The output of the convolutional layers is flattened to be fed into a fully connected dense layer with 64 neurons and ReLU activation.
+Dropout: A dropout layer with a dropout rate of 0.3 is added to prevent overfitting by randomly deactivating neurons during training.
+Output Layer: The model concludes with an output layer containing two neurons, activated by softmax for multiclass classification.
+Compilation and Optimization:
+The model is compiled using categorical cross-entropy loss, SGD optimizer, and accuracy as the evaluation metric.
+
+Overall, this model architecture is designed to efficiently process image data, extract relevant features, and classify them accurately, making it suitable for tasks such as identifying powdery mildew in cherry leaves.
+
+## Trial and error / Development and Machine Learning Model Iterations
+In my project, the Trial and Error module serves as the cornerstone of my model development, allowing me to systematically refine and optimize my image classification model for detecting powdery mildew on cherry leaves. Through iterative experimentation, I explore various model architectures, hyperparameters, and training techniques to identify the most effective combination for my specific task. This module provides essential tools for tracking experiment results, comparing performance metrics, and visualizing trends over time. This enables me to make informed decisions and iteratively refine my model based on empirical evidence gathered from experimentation. Ultimately, the insights gained from the trial and error phase guide me in developing a robust and high-performing image classification model tailored to my specific task of detecting powdery mildew on cherry leaves. Additionally, it's important to note that all versions of the model are designed with a fixed input image size of 200x200 pixels, ensuring consistency and comparability across experiments.
+
+**Version 1** (V1):<br>
+The initial model architecture featured a sequence of convolutional and pooling layers, succeeded by a dense layer and an output layer. Trained with a batch size of 20 using the SGD optimizer and categorical cross-entropy loss function, it yielded an impressive accuracy of 98.22% on the test set. This version exhibited stable and consistent performance in accurately classifying cherry leaves as healthy or afflicted by powdery mildew. Noteworthy from the model's confusion matrix were high precision and recall scores for both classes, highlighting its efficacy in discerning between healthy and powdery mildew-affected leaves. Moreover, manual testing consistently validated the model's reliability and accuracy. Given its robust performance, Version 1 was selected as the preferred model for further deployment and evaluation.
+
+**Version 2** (V2):<br>
+
+**Version 3** (V3):<br>
+Starting from Version 2, where it was observed that Softmax performed better, I continued to experiment with Softmax variations in subsequent versions to enhance model performance. Here I increased the number of layers and neurons while also raising the dropout rate to 40% for better regularization. Despite achieving a validation accuracy of 99.76% during training, signs of overfitting emerged in the learning curve. Although the model demonstrated high precision and recall on the test set, manual testing revealed occasional errors, indicating potential overfitting issues. Therefore, further investigation into simplifying the model's architecture or implementing stronger regularization techniques was necessary.
+
+**Version 4** (V4):<br>
+I continued experimenting with different variations of Softmax activation in subsequent versions. In this version, I retained the architecture similar to V3 but switched the optimizer to Adagrad. Despite achieving a validation accuracy of 91.67% during training, signs of overfitting emerged in the learning curve, suggesting that further adjustments might be necessary to improve generalization. The model demonstrated a precision of 0.94 and recall of 0.94 on the test set, with an overall accuracy of 0.94. However, manual testing revealed some discrepancies, indicating potential overfitting issues that need to be addressed in future iterations.
+
+**Version 5** (V5):<br>
+
+**Version 6** (V6):<br>
+
+**Version 7** (V7):<br>
+
+**Version 8** (V8):<br>
+
+**Version 9** (V9):<br>
+
 ## Rationale to map the business requirements to the Data Visualizations and ML tasks
 **Business Requirement 1**: Conduct an analysis to visually distinguish between healthy cherry leaves and those affected by powdery mildew.
 
@@ -70,18 +146,8 @@ By addressing these objectives, the client aims to optimize the inspection proce
 - When loading images into memory for model training, consider their shape to ensure compatibility with performance criteria.
 - Explore various image shape options to strike an optimal balance between model size and performance.
 
-## Hypothesis and validation
-* List here your project hypothesis(es) and how you envision validating it (them).
-
-
-## The rationale to map the business requirements to the Data Visualisations and ML tasks
-* List your business requirements and a rationale to map them to the Data Visualisations and ML tasks.
-
 
 ## ML Business Case
-
-Cherry Leaves Powdery Mildew Detector
-
 - **Introduction**:
 The aim of this project is to develop a machine learning model capable of accurately predicting whether a cherry leaf is healthy or infected with powdery mildew. This classification task is crucial for farmers to efficiently identify and manage diseased plants, ultimately ensuring the health and productivity of their cherry crops.
 
@@ -111,7 +177,6 @@ Validate the hypothesis by comparing the average characteristics of healthy and 
 By developing an accurate and efficient machine learning model for powdery mildew detection in cherry leaves, Farmy & Foody company can streamline their disease management practices, minimize crop losses, and improve overall farm productivity. The successful implementation of the model will empower farmers with a reliable tool for early disease detection and intervention, ultimately contributing to the sustainability and profitability of cherry cultivation.
 
 ## Conclusion and Potential Course of Actions
-
 In this project, our focus was on detecting powdery mildew in cherry leaves. We began by formulating hypotheses and validating them through research, analysis, and machine learning model development. Here are the key findings:
 
 **Hypothesis 1** (Do infected leaves have distinguishable marks from healthy ones?):
