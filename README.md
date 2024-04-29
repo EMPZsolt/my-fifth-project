@@ -7,6 +7,8 @@
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
 - [Hypothesis and validation](#hypothesis-and-validation)
+    - [Hypothesis 1](#hypothesis-1-infected-leaves-have-clear-marks-distinguishing-them-from-healthy-leaves)
+    - [Hypothesis 2](#hypothesis-2-mathematical-formulas-comparison)
 - [Rationale for the model](#the-rationale-for-the-model)
 - [Trial and error](#trial-and-error)
 - [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
@@ -109,7 +111,7 @@ The model is compiled using categorical cross-entropy loss, SGD optimizer, and a
 
 Overall, this model architecture is designed to efficiently process image data, extract relevant features, and classify them accurately, making it suitable for tasks such as identifying powdery mildew in cherry leaves.
 
-## Trial and error / Development and Machine Learning Model Iterations
+## Trial and Error / Development and ML Model Iterations
 In my project, the Trial and Error module serves as the cornerstone of my model development, allowing me to systematically refine and optimize my image classification model for detecting powdery mildew on cherry leaves. Through iterative experimentation, I explore various model architectures, hyperparameters, and training techniques to identify the most effective combination for my specific task. This module provides essential tools for tracking experiment results, comparing performance metrics, and visualizing trends over time. This enables me to make informed decisions and iteratively refine my model based on empirical evidence gathered from experimentation. Ultimately, the insights gained from the trial and error phase guide me in developing a robust and high-performing image classification model tailored to my specific task of detecting powdery mildew on cherry leaves. Additionally, it's important to note that all versions of the model are designed with a fixed input image size of 200x200 pixels, ensuring consistency and comparability across experiments.
 
 **Version 1** (V1):<br>
@@ -151,6 +153,12 @@ In this model, I increased the number of neurons, decreased the dropout by 10% (
 - Utilize Neural Networks to establish correlations between cherry leaf features (images) and their corresponding health labels (healthy or powdery mildew-infected).
 - When loading images into memory for model training, consider their shape to ensure compatibility with performance criteria.
 - Explore various image shape options to strike an optimal balance between model size and performance.
+
+**Business Requirement 3**: Providing a report
+- The client aims to obtain insightful reports summarizing the outcomes of cherry leaf examinations, facilitating informed decision-making and strategic planning.
+- Automated Report Generation: Upon the completion of each batch of cherry leaf image analyses, the system automatically generates downloadable .csv reports. These reports succinctly summarize the ML predictions, providing a clear overview of each leaf's predicted health status—whether healthy or affected by powdery mildew.
+- Streamlined Reporting Interface: The reporting functionality is seamlessly integrated into the Streamlit dashboard, ensuring easy access and navigation for the client. This intuitive interface simplifies the process of reviewing and downloading prediction data, enhancing user experience and efficiency.
+- In essence, the report generation feature fulfills the client's need for actionable insights derived from ML predictions. By automating report generation and providing an accessible interface, the client can make informed decisions and implement strategic measures for cherry crop management effectively.
 
 ## ML Business Case
 - **Introduction**:
@@ -243,6 +251,8 @@ This page is dedicated to detecting powdery mildew in cherry leaves. It fulfills
     - Processes the uploaded images using a machine learning model to predict whether the leaves are healthy or infected with powdery mildew.
 - Prediction Statement and Probability:
     - Displays the prediction statement indicating if the leaf is infected or not with powdery mildew, along with the associated probability.
+- Table with the image name and prediction results.
+- Download button to save the report in a .csv format.
 
 ### Page 4: Project Hypothesis and Validation
 This section delves into the hypotheses formulated during the project's inception and outlines the validation process conducted to test these hypotheses.
