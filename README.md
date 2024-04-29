@@ -116,6 +116,7 @@ In my project, the Trial and Error module serves as the cornerstone of my model 
 The initial model architecture featured a sequence of convolutional and pooling layers, succeeded by a dense layer and an output layer. Trained with a batch size of 20 using the SGD optimizer and categorical cross-entropy loss function, it yielded an impressive accuracy of 98.22% on the test set. This version exhibited stable and consistent performance in accurately classifying cherry leaves as healthy or afflicted by powdery mildew. Noteworthy from the model's confusion matrix were high precision and recall scores for both classes, highlighting its efficacy in discerning between healthy and powdery mildew-affected leaves. Moreover, manual testing consistently validated the model's reliability and accuracy. Given its robust performance, Version 1 was selected as the preferred model for further deployment and evaluation.
 
 **Version 2** (V2):<br>
+I utilized a model architecture with multiple convolutional and pooling layers, followed by a dense layer and a sigmoid output layer. Despite achieving an impressive accuracy of 99.76% on the validation set during training, signs of overfitting emerged in the learning curve. The model demonstrated a precision of 0.25 and recall of 0.50 on the test set, with an overall accuracy of 0.50. However, manual testing revealed erroneous results, indicating potential overfitting issues that need to be addressed in future iterations. Additionally, it's worth mentioning that the model's structure remains consistent with the first softmax version. Based on these findings, I decided to switch to the softmax version for further experimentation.
 
 **Version 3** (V3):<br>
 Starting from Version 2, where it was observed that Softmax performed better, I continued to experiment with Softmax variations in subsequent versions to enhance model performance. Here I increased the number of layers and neurons while also raising the dropout rate to 40% for better regularization. Despite achieving a validation accuracy of 99.76% during training, signs of overfitting emerged in the learning curve. Although the model demonstrated high precision and recall on the test set, manual testing revealed occasional errors, indicating potential overfitting issues. Therefore, further investigation into simplifying the model's architecture or implementing stronger regularization techniques was necessary.
@@ -124,14 +125,19 @@ Starting from Version 2, where it was observed that Softmax performed better, I 
 I continued experimenting with different variations of Softmax activation in subsequent versions. In this version, I retained the architecture similar to V3 but switched the optimizer to Adagrad. Despite achieving a validation accuracy of 91.67% during training, signs of overfitting emerged in the learning curve, suggesting that further adjustments might be necessary to improve generalization. The model demonstrated a precision of 0.94 and recall of 0.94 on the test set, with an overall accuracy of 0.94. However, manual testing revealed some discrepancies, indicating potential overfitting issues that need to be addressed in future iterations.
 
 **Version 5** (V5):<br>
+I adjusted the batch size to 16 and utilized the Adam optimizer in the model architecture. The model retains the same structure as the original version, comprising multiple convolutional and pooling layers followed by a dense layer and a softmax output layer. Notably, the learning curve did not exhibit signs of overfitting. Despite the smaller batch size, the model demonstrated exceptional performance, achieving a validation accuracy of 100% during training. Evaluation on the test set resulted in a remarkable accuracy of 99.88%, with precision, recall, and F1-score all reaching 1.00 for both classes. This indicates robust generalization and excellent performance on unseen data. In spite of this, manual testing revealed erroneous results, suggesting potential issues with generalization or data quality that need to be addressed in future iterations.
 
 **Version 6** (V6):<br>
+Despite maintaining a similar structure and employing the SGD optimizer with a batch size 16, Version 6 faced challenges. Despite training for 16 epochs, the learning curve displayed signs of overfitting, and manual testing revealed discrepancies in the model's predictions. Though achieving an impressive 99.64% accuracy on the test set, further investigation is needed to address the model's generalization issues observed during manual testing.
 
 **Version 7** (V7):<br>
+In Version 7, a similar architecture was employed as in the previous model, with the batch size set to 18 and the dropout rate increased by 10%. Training with the SGD optimizer for 21 epochs resulted in a more stable learning curve compared to the previous version. However, manual testing revealed instances of misclassification, suggesting that the model may have learned incorrect patterns.
 
 **Version 8** (V8):<br>
+Similar to previous models, the structure remained the same, with a batch size of 18 and utilizing the Adam optimizer instead. The dropout rate stayed on 0.4. Although the training curve suggested that the training and validation phases were following each other, they remained relatively distant. Unfortunately, manual testing revealed that the model often misclassified images, indicating that it likely overfitted.
 
 **Version 9** (V9):<br>
+In this model, I increased the number of neurons, decreased the dropout by 10% (returning to the original value of 0.3), while keeping the batch size at 18. This resulted in a well-distributed training function. While there is some fluctuation in accuracy, it is negligible, and there is excellent alignment in the loss function between the training and validation sets. However, despite these improvements, manual testing still resulted in many misclassifications. Therefore, I decided to stick with the original model, which showed less accurate numbers but demonstrated much higher accuracy during manual testing.
 
 ## Rationale to map the business requirements to the Data Visualizations and ML tasks
 **Business Requirement 1**: Conduct an analysis to visually distinguish between healthy cherry leaves and those affected by powdery mildew.
@@ -145,7 +151,6 @@ I continued experimenting with different variations of Softmax activation in sub
 - Utilize Neural Networks to establish correlations between cherry leaf features (images) and their corresponding health labels (healthy or powdery mildew-infected).
 - When loading images into memory for model training, consider their shape to ensure compatibility with performance criteria.
 - Explore various image shape options to strike an optimal balance between model size and performance.
-
 
 ## ML Business Case
 - **Introduction**:
@@ -277,15 +282,67 @@ By incorporating these ML performance metrics and evaluation results into the pr
 
 
 ## CRISP DM Process
+The CRoss Industry Standard Process for Data Mining (CRISP-DM) is a process model that serves as the base for a data science process. It has six sequential phases:
 
+![CRISP-DM Model](/readme_images/CRISP-DM_Process_Diagram.png)
+
+**Business Understanding**( What does the business need?):
+- Project observation:<br>
+The goal is to develop a model for early detection of plant diseases to enhance agricultural productivity.
+- Results:<br>
+Identified the importance of early disease detection for optimizing crop yield and reducing economic losses.
+- Summary:<br>
+Recognized the need for an accurate and efficient disease detection system to support agricultural practices.
+
+**Data Understanding**(What data do we have / need? Is it clean?):
+- Project observation:<br>
+Gathered datasets consisting of labeled images of plant diseases and healthy plants.
+- Results:<br>
+Explored the datasets to understand the distribution of classes, image quality, and potential challenges.
+- Summary:<br>
+Acquired insights into the available data, including the symptoms of powdery mildew infection and the variety of images.
+
+**Data Preparation**(How do we organize the data for modeling?):
+- Project observation:<br>
+Preprocessed the images by resizing, normalizing, and augmenting them to improve model performance.
+- Results:<br>
+Cleaned the data, handled missing values (during the investigations, it was found that these steps were not necessary, the database was clean and there were no missing data), and split it into training, validation, and test sets.
+- Summary:<br>
+Prepared the datasets for modeling by ensuring data consistency, quality, and suitability for training.
+
+**Modeling**(What modeling techniques should we apply?):
+- Project observation:<br>
+Developed a convolutional neural network model for classifying plant diseases based on the preprocessed image data.
+- Results:<br>
+Trained the CNN model using the prepared datasets and optimized its architecture and hyperparameters.
+- Summary:<br>
+Created a predictive model capable of classifying plant diseases with high accuracy and generalization performance.
+
+**Evaluation**(Which model best meets the business objectives?):
+- Project observation:<br>
+Evaluated the trained model's performance using various metrics such as accuracy, precision, recall, and F1-score.
+- Results:<br>
+Assessed the model's ability to accurately classify diseases and its performance on unseen data.
+-Summary:<br>
+Determined the model's effectiveness in disease detection and its alignment with project objectives based on evaluation metrics.
+
+**Deployment**(How do stakeholders access the results?):
+- Project observation:<br>
+Implemented the trained model into a web application accessible to agricultural stakeholders.
+- Results:<br>
+Deployed the model to provide real-time disease detection capabilities to farmers and agricultural experts.
+- Summary:<br>
+Successfully integrated the model into production to support decision-making and enhance agricultural practices.
+
+
+By following the CRISP-DM process, the project systematically addressed the business problem of plant disease detection, leveraging data science techniques to deliver actionable insights and deployable solutions for improving agricultural productivity. This process is documented using the [Kanban Board](https://github.com/users/EMPZsolt/projects/3/views/1) provided by GitHub.
 
 ## Unfixed Bugs
-There is no known unfixed bugs in the project.
+There are inaccuracies in image recognition. Certain images of poor quality or unfavorable lighting conditions lead to the model's inability to correctly identify infections. In rare instances, it may even misidentify healthy leaves as infected. Further refinement of the model and enhancements in image quality are necessary to minimize these errors significantly.
 
 ## Deployment
 
 ### Heroku
-
 * The App live link is: https://YOUR_APP_NAME.herokuapp.com/ 
 * Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
@@ -296,6 +353,12 @@ There is no known unfixed bugs in the project.
 4. Select the branch you want to deploy, then click Deploy Branch.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click now the button Open App on the top of the page to access your App.
 6. If the slug size is too large then add large files not required for the app to the .slugignore file. 
+
+Note on the initial upload attempt:<br>
+During the initial upload attempt, we encountered issues due to the size of the application, significantly exceeding the upload limit (500M). To address this, several steps were taken. Firstly, I reduced the image database resolution from 256x256 pixels to 200x200 pixels, aiming to minimize the degradation in image quality. Subsequently, I cleared the Heroku cache, and finally, I divided the application into development versions of the model, retaining only the necessary version while adding the rest to the .slugignore file. This effectively addressed the problem arising from the application's size.
+
+I would also note it here that an application error occurred during the upload process:<br>
+During my attempts to predict the presence of diseases on cherry leaves using the model, I encountered incorrect results. The model indicated the presence of disease when the leaf was healthy, and vice versa. The root cause of the problem was the target_map dictionary used during model predictions, where 'Healthy' and 'Infected' classes were incorrectly labeled. To address this, I reversed these classes in the target_map dictionary to ensure the model interprets predictions correctly.
 
 ### Fork Repository 
 To fork the repository, perform the following steps:
@@ -321,7 +384,6 @@ To clone the repository, perform the following steps:
 - **Python**
 
 ### Main Data Analysis and Machine Learning Libraries
-
 - **tensorflow-cpu 2.6.0**: Used for training and creating the machine learning model.
 - **numpy 1.19.2**: Utilized for converting data to arrays for efficient manipulation and computation.
 - **scikit-learn 0.24.2**: Employed for evaluating the performance of the machine learning model through various metrics and techniques.
@@ -349,9 +411,11 @@ To clone the repository, perform the following steps:
 ### Content 
 - The text for the Home page was taken from [BC Tree Fruit Production Guide](https://www.bctfpg.ca/pest_guide/info/101/).
 - The dataset is from [Kagle](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves).
+- The CRISP-DM model introduction is from [Data Science Process Alliance](https://www.datascience-pm.com/crisp-dm-2/).
 
 ### Media
 - The header image in the Readme has been sourced from [Adobe Stock](https://stock.adobe.com/search?k=%22cherry+leaf%22&asset_id=497344868).
+- The CRISP-DM model image is from [Wikipedia](https://en.wikipedia.org/wiki/Cross-industry_standard_process_for_data_mining).
 
 ### Code
 - The layout I used for this project is provided by [CodeInstitute](https://github.com/Code-Institute-Solutions/milestone-project-mildew-detection-in-cherry-leaves).
@@ -362,6 +426,6 @@ To clone the repository, perform the following steps:
 ## Acknowledgements
 I would like to acknowledge the following people who helped me along the way in completing my fifth milestone project:
 
-My wife, who supported me through the project.
-My Mentor, Mo Shami, who showed the direction, helped and encouraged me.
+My wife, who supported me through the project.<br>
+My Mentor, Mo Shami, who showed the direction, helped and encouraged me.<br>
 Thank you to entire Code Isntitute for making my development possible.

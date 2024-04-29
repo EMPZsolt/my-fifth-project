@@ -11,26 +11,26 @@ from src.machine_learning.predictive_analysis import (
                                                     )
 
 def page_powdery_mildew_detector_body():
-    st.warning(
-        f"* The client is interested in predicting if a cherry leaf is healthy or contains powdery mildew. "
+    st.info(
+        f"Upload pictures of cherry leaves to discover whether it's affected by powdery mildew or not and download a report of the examined leaves."
         )
 
     st.write(
-        f"* You can download a set of healthy and infected leaves for live prediction from. "
-        f"You can download the images from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves)."
-        )
+        f"You can download a set of infected and healthy leaves for live prediction from [here](https://www.kaggle.com/datasets/codeinstitute/cherry-leaves).")
 
     st.write("---")
-
-    images_buffer = st.file_uploader('Upload a picture of a cherry leaf. You may select more than one.',
-                                        type='png',accept_multiple_files=True)
+    
+    st.write(
+        f"**Upload a clear picture of a cherry leaf. You may select more than one.**"
+        )
+    images_buffer = st.file_uploader(' ', type=['jpeg', 'jpg'], accept_multiple_files=True)
    
     if images_buffer is not None:
         df_report = pd.DataFrame([])
         for image in images_buffer:
 
             img_pil = (Image.open(image))
-            st.info(f"Leaf Sample: **{image.name}**")
+            st.info(f"Cherry leaf Sample: **{image.name}**")
             img_array = np.array(img_pil)
             st.image(img_pil, caption=f"Image Size: {img_array.shape[1]}px width x {img_array.shape[0]}px height")
 

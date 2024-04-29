@@ -24,7 +24,7 @@ def page_leaves_visualizer_body():
       st.warning(
         f"* We notice the average and variability images did not show "
         f"patterns where we could intuitively differentiate one from another. " 
-        f"However, a small difference in the colour pigment of the average images is seen for both labels.")
+        f"However, a small difference in the color pigment of the average images is seen for both labels.")
 
       st.image(avg_healthy, caption='Healthy leaf - Average and Variability')
       st.image(avg_infected, caption='Infected leaf - Average and Variability')
