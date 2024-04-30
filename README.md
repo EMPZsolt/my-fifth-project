@@ -11,15 +11,15 @@
     - [Hypothesis 2](#hypothesis-2-mathematical-formulas-comparison)
 - [Rationale for the model](#rationale-for-the-model)
 - [Trial and error](#trial-and-error--development-and-ml-model-iterations)
-    -[Version 1](#version-1-v1)
-    -[Version 2](#version-2-v2)
-    -[Version 3](#version-3-v3)
-    -[Version 4](#version-4-v4)
-    -[Version 5](#version-5-v5)
-    -[Version 6](#version-6-v6)
-    -[Version 7](#version-7-v7)
-    -[Version 8](#version-8-v8)
-    -[Version 9](#version-9-v9)
+    - [Version 1](#version-1-v1)
+    - [Version 2](#version-2-v2)
+    - [Version 3](#version-3-v3)
+    - [Version 4](#version-4-v4)
+    - [Version 5](#version-5-v5)
+    - [Version 6](#version-6-v6)
+    - [Version 7](#version-7-v7)
+    - [Version 8](#version-8-v8)
+    - [Version 9](#version-9-v9)
 - [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [ML Business case](#ml-business-case)
 - [Conclusion and Potential Course of Actions](#conclusion-and-potential-course-of-actions)
@@ -128,165 +128,218 @@ In my project, the Trial and Error module serves as the cornerstone of my model 
 ### **Version 1** (V1):<br>
 The initial model architecture consisted of a sequence of convolutional and pooling layers, followed by a dense layer and an output layer. Trained with a batch size of 20 using the SGD optimizer and a categorical cross-entropy loss function, it also implemented a dropout rate of 0.3 to prevent overfitting. This comprehensive approach resulted in an impressive accuracy of 98.22% on the test set. Throughout testing, the model consistently exhibited stable and reliable performance, accurately classifying cherry leaves as healthy or afflicted by powdery mildew. Notably, the model's confusion matrix revealed high precision and recall scores for both classes, underscoring its efficacy in distinguishing between healthy and powdery mildew-affected leaves. Additionally, manual testing consistently validated the model's reliability and accuracy. As a result of its robust performance, Version 1 was selected as the preferred model for further deployment and evaluation.
 
-![Model Structure](/readme_images/v1_model.png)
 The model structure of Version 1
 
-![v1 Accuracy](/outputs/v1/model_training_acc.png)
+![Model Structure](/readme_images/v1_model.png)
+
 Version 1 Learning Curve (Accuracy)
 
-![v1 Loss](/outputs/v1/model_training_losses.png)
+![v1 Accuracy](/outputs/v1/model_training_acc.png)
+
 Version 1 Learning Curve (Loss)
 
-![v1 Confusion Matrix](/outputs/v1/confusion_matrix.png)
+![v1 Loss](/outputs/v1/model_training_losses.png)
+
 Version 1 Confusion Matrix
 
-![v1 Classification Report](/outputs/v1/classification_report.png)
+![v1 Confusion Matrix](/outputs/v1/confusion_matrix.png)
+
 Version 1 Classification Report
+
+![v1 Classification Report](/outputs/v1/classification_report.png)
 
 
 ### **Version 2** (V2):<br>
 I utilized a model architecture with multiple convolutional and pooling layers, followed by a dense layer and a sigmoid output layer. Despite achieving an impressive accuracy of 99.76% on the validation set during training, signs of overfitting emerged in the learning curve. The model demonstrated a precision of 0.25 and recall of 0.50 on the test set, with an overall accuracy of 0.50. However, manual testing revealed erroneous results, indicating potential overfitting issues that need to be addressed in future iterations. Additionally, it's worth mentioning that the model's structure remains consistent with the first softmax version. Based on these findings, I decided to switch to the softmax version for further experimentation.
 
-![Model Structure](/readme_images/v2_model.png)
 The model structure of Version 2
 
-![v2 Accuracy](/outputs/v2/model_training_acc.png)
+![Model Structure](/readme_images/v2_model.png)
+
 Version 2 Learning Curve (Accuracy)
 
-![v2 Loss](/outputs/v2/model_training_losses.png)
+![v2 Accuracy](/outputs/v2/model_training_acc.png)
+
 Version 2 Learning Curve (Loss)
 
-![v2 Confusion Matrix](/outputs/v2/confusion_matrix.png)
+![v2 Loss](/outputs/v2/model_training_losses.png)
+
 Version 2 Confusion Matrix
 
-![v2 Classification Report](/outputs/v2/classification_report.png)
+![v2 Confusion Matrix](/outputs/v2/confusion_matrix.png)
+
 Version 2 Classification Report
+
+![v2 Classification Report](/outputs/v2/classification_report.png)
+
 
 ### **Version 3** (V3):<br>
 Starting from Version 2, where it was observed that Softmax performed better, I continued to experiment with Softmax variations in subsequent versions to enhance model performance. Here I increased the number of layers and neurons while also raising the dropout rate to 40% for better regularization. Despite achieving a validation accuracy of 99.76% during training, signs of overfitting emerged in the learning curve. Although the model demonstrated high precision and recall on the test set, manual testing revealed occasional errors, indicating potential overfitting issues. Therefore, further investigation into simplifying the model's architecture or implementing stronger regularization techniques was necessary.
 
-![Model Structure](/readme_images/v3_model.png)
 The model structure of Version 3
 
-![v3 Accuracy](/outputs/v3/model_training_acc.png)
+![Model Structure](/readme_images/v3_model.png)
+
 Version 3 Learning Curve (Accuracy)
 
-![v3 Loss](/outputs/v3/model_training_losses.png)
+![v3 Accuracy](/outputs/v3/model_training_acc.png)
+
 Version 3 Learning Curve (Loss)
 
-![v3 Confusion Matrix](/outputs/v3/confusion_matrix.png)
+![v3 Loss](/outputs/v3/model_training_losses.png)
+
 Version 3 Confusion Matrix
 
-![v3 Classification Report](/outputs/v3/classification_report.png)
+![v3 Confusion Matrix](/outputs/v3/confusion_matrix.png)
+
 Version 3 Classification Report
+
+![v3 Classification Report](/outputs/v3/classification_report.png)
+
 
 ### **Version 4** (V4):<br>
 I continued experimenting with different variations of Softmax activation in subsequent versions. In this version, I retained the architecture similar to V3 but switched the optimizer to Adagrad. Despite achieving a validation accuracy of 91.67% during training, signs of overfitting emerged in the learning curve, suggesting that further adjustments might be necessary to improve generalization. The model demonstrated a precision of 0.94 and recall of 0.94 on the test set, with an overall accuracy of 0.94. However, manual testing revealed some discrepancies, indicating potential overfitting issues that need to be addressed in future iterations.
 
-![Model Structure](/readme_images/v4_model.png)
 The model structure of Version 4
 
-![v4 Accuracy](/outputs/v4/model_training_acc.png)
+![Model Structure](/readme_images/v4_model.png)
+
 Version 4 Learning Curve (Accuracy)
 
-![v4 Loss](/outputs/v4/model_training_losses.png)
+![v4 Accuracy](/outputs/v4/model_training_acc.png)
+
 Version 4 Learning Curve (Loss)
 
-![v4 Confusion Matrix](/outputs/v4/confusion_matrix.png)
+![v4 Loss](/outputs/v4/model_training_losses.png)
+
 Version 4 Confusion Matrix
 
-![v4 Classification Report](/outputs/v4/classification_report.png)
+![v4 Confusion Matrix](/outputs/v4/confusion_matrix.png)
+
 Version 4 Classification Report
+
+![v4 Classification Report](/outputs/v4/classification_report.png)
+
 
 ### **Version 5** (V5):<br>
 I adjusted the batch size to 16 and utilized the Adam optimizer in the model architecture. The model retains the same structure as the original version, comprising multiple convolutional and pooling layers followed by a dense layer and a softmax output layer. Notably, the learning curve did not exhibit signs of overfitting. Despite the smaller batch size, the model demonstrated exceptional performance, achieving a validation accuracy of 100% during training. Evaluation on the test set resulted in a remarkable accuracy of 99.88%, with precision, recall, and F1-score all reaching 1.00 for both classes. This indicates robust generalization and excellent performance on unseen data. In spite of this, manual testing revealed erroneous results, suggesting potential issues with generalization or data quality that need to be addressed in future iterations.
 
-![Model Structure](/readme_images/v5_model.png)
 The model structure of Version 5
 
-![v5 Accuracy](/outputs/v5/model_training_acc.png)
+![Model Structure](/readme_images/v5_model.png)
+
 Version 5 Learning Curve (Accuracy)
 
-![v5 Loss](/outputs/v5/model_training_losses.png)
+![v5 Accuracy](/outputs/v5/model_training_acc.png)
+
 Version 5 Learning Curve (Loss)
 
-![v5 Confusion Matrix](/outputs/v5/confusion_matrix.png)
+![v5 Loss](/outputs/v5/model_training_losses.png)
+
 Version 5 Confusion Matrix
 
-![v5 Classification Report](/outputs/v5/classification_report.png)
+![v5 Confusion Matrix](/outputs/v5/confusion_matrix.png)
+
 Version 5 Classification Report
+
+![v5 Classification Report](/outputs/v5/classification_report.png)
+
 
 ### **Version 6** (V6):<br>
 Despite maintaining a similar structure and employing the SGD optimizer with a batch size 16, Version 6 faced challenges. Despite training for 16 epochs, the learning curve displayed signs of overfitting, and manual testing revealed discrepancies in the model's predictions. Though achieving an impressive 99.64% accuracy on the test set, further investigation is needed to address the model's generalization issues observed during manual testing.
 
-![Model Structure](/readme_images/v6_model.png)
 The model structure of Version 6
 
-![v6 Accuracy](/outputs/v6/model_training_acc.png)
+![Model Structure](/readme_images/v6_model.png)
+
 Version 6 Learning Curve (Accuracy)
 
-![v6 Loss](/outputs/v6/model_training_losses.png)
+![v6 Accuracy](/outputs/v6/model_training_acc.png)
+
 Version 6 Learning Curve (Loss)
 
-![v6 Confusion Matrix](/outputs/v6/confusion_matrix.png)
+![v6 Loss](/outputs/v6/model_training_losses.png)
+
 Version 6 Confusion Matrix
 
-![v6 Classification Report](/outputs/v6/classification_report.png)
+![v6 Confusion Matrix](/outputs/v6/confusion_matrix.png)
+
 Version 6 Classification Report
+
+![v6 Classification Report](/outputs/v6/classification_report.png)
+
 
 ### **Version 7** (V7):<br>
 In Version 7, a similar architecture was employed as in the previous model, with the batch size set to 18 and the dropout rate increased by 10%. Training with the SGD optimizer for 21 epochs resulted in a more stable learning curve compared to the previous version. However, manual testing revealed instances of misclassification, suggesting that the model may have learned incorrect patterns.
 
-![Model Structure](/readme_images/v7_model.png)
 The model structure of Version 7
 
-![v7 Accuracy](/outputs/v7/model_training_acc.png)
+![Model Structure](/readme_images/v7_model.png)
+
 Version 7 Learning Curve (Accuracy)
 
-![v7 Loss](/outputs/v7/model_training_losses.png)
+![v7 Accuracy](/outputs/v7/model_training_acc.png)
+
 Version 7 Learning Curve (Loss)
 
-![v7 Confusion Matrix](/outputs/v7/confusion_matrix.png)
+![v7 Loss](/outputs/v7/model_training_losses.png)
+
 Version 7 Confusion Matrix
 
-![v7 Classification Report](/outputs/v7/classification_report.png)
+![v7 Confusion Matrix](/outputs/v7/confusion_matrix.png)
+
 Version 5 Classification Report
+
+![v7 Classification Report](/outputs/v7/classification_report.png)
+
 
 ### **Version 8** (V8):<br>
 Similar to previous models, the structure remained the same, with a batch size of 18 and utilizing the Adam optimizer instead. The dropout rate stayed on 0.4. Although the training curve suggested that the training and validation phases were following each other, they remained relatively distant. Unfortunately, manual testing revealed that the model often misclassified images, indicating that it likely overfitted.
 
-![Model Structure](/readme_images/v8_model.png)
 The model structure of Version 8
 
-![v8 Accuracy](/outputs/v8/model_training_acc.png)
+![Model Structure](/readme_images/v8_model.png)
+
 Version 8 Learning Curve (Accuracy)
 
-![v8 Loss](/outputs/v8/model_training_losses.png)
+![v8 Accuracy](/outputs/v8/model_training_acc.png)
+
 Version 8 Learning Curve (Loss)
 
-![v8 Confusion Matrix](/outputs/v8/confusion_matrix.png)
+![v8 Loss](/outputs/v8/model_training_losses.png)
+
 Version 8 Confusion Matrix
 
-![v8 Classification Report](/outputs/v8/classification_report.png)
+![v8 Confusion Matrix](/outputs/v8/confusion_matrix.png)
+
 Version 8 Classification Report
+
+![v8 Classification Report](/outputs/v8/classification_report.png)
+
 
 ### **Version 9** (V9):<br>
 In this model, I increased the number of neurons, decreased the dropout by 10% (returning to the original value of 0.3), while keeping the batch size at 18. This resulted in a well-distributed training function. While there is some fluctuation in accuracy, it is negligible, and there is excellent alignment in the loss function between the training and validation sets. However, despite these improvements, manual testing still resulted in many misclassifications. Therefore, I decided to stick with the original model, which showed less accurate numbers but demonstrated much higher accuracy during manual testing.
 
-![Model Structure](/readme_images/v9_model.png)
 The model structure of Version 9
 
-![v9 Accuracy](/outputs/v9/model_training_acc.png)
+![Model Structure](/readme_images/v9_model.png)
+
 Version 9 Learning Curve (Accuracy)
 
-![v9 Loss](/outputs/v9/model_training_losses.png)
+![v9 Accuracy](/outputs/v9/model_training_acc.png)
+
 Version 9 Learning Curve (Loss)
 
-![v9 Confusion Matrix](/outputs/v9/confusion_matrix.png)
+![v9 Loss](/outputs/v9/model_training_losses.png)
+
 Version 9 Confusion Matrix
 
-![v9 Classification Report](/outputs/v9/classification_report.png)
+![v9 Confusion Matrix](/outputs/v9/confusion_matrix.png)
+
 Version 9 Classification Report
+
+![v9 Classification Report](/outputs/v9/classification_report.png)
+
 
 ## Rationale to map the business requirements to the Data Visualizations and ML tasks
 **Business Requirement 1**: Conduct an analysis to visually distinguish between healthy cherry leaves and those affected by powdery mildew.
