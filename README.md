@@ -10,7 +10,7 @@
     - [Hypothesis 1](#hypothesis-1-infected-leaves-have-clear-marks-distinguishing-them-from-healthy-leaves)
     - [Hypothesis 2](#hypothesis-2-mathematical-formulas-comparison)
 - [Rationale for the model](#the-rationale-for-the-model)
-- [Trial and error](#trial-and-error)
+- [Trial and error](#trial-and-error--development-and-ml-model-iterations)
 - [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [ML Business case](#ml-business-case)
 - [Conclusion and Potential Course of Actions](#conclusion-and-potential-course-of-actions)
@@ -114,32 +114,132 @@ Overall, this model architecture is designed to efficiently process image data, 
 ## Trial and Error / Development and ML Model Iterations
 In my project, the Trial and Error module serves as the cornerstone of my model development, allowing me to systematically refine and optimize my image classification model for detecting powdery mildew on cherry leaves. Through iterative experimentation, I explore various model architectures, hyperparameters, and training techniques to identify the most effective combination for my specific task. This module provides essential tools for tracking experiment results, comparing performance metrics, and visualizing trends over time. This enables me to make informed decisions and iteratively refine my model based on empirical evidence gathered from experimentation. Ultimately, the insights gained from the trial and error phase guide me in developing a robust and high-performing image classification model tailored to my specific task of detecting powdery mildew on cherry leaves. Additionally, it's important to note that all versions of the model are designed with a fixed input image size of 200x200 pixels, ensuring consistency and comparability across experiments.
 
-**Version 1** (V1):<br>
-The initial model architecture featured a sequence of convolutional and pooling layers, succeeded by a dense layer and an output layer. Trained with a batch size of 20 using the SGD optimizer and categorical cross-entropy loss function, it yielded an impressive accuracy of 98.22% on the test set. This version exhibited stable and consistent performance in accurately classifying cherry leaves as healthy or afflicted by powdery mildew. Noteworthy from the model's confusion matrix were high precision and recall scores for both classes, highlighting its efficacy in discerning between healthy and powdery mildew-affected leaves. Moreover, manual testing consistently validated the model's reliability and accuracy. Given its robust performance, Version 1 was selected as the preferred model for further deployment and evaluation.
+### **Version 1** (V1):<br>
+The initial model architecture consisted of a sequence of convolutional and pooling layers, followed by a dense layer and an output layer. Trained with a batch size of 20 using the SGD optimizer and a categorical cross-entropy loss function, it also implemented a dropout rate of 0.3 to prevent overfitting. This comprehensive approach resulted in an impressive accuracy of 98.22% on the test set. Throughout testing, the model consistently exhibited stable and reliable performance, accurately classifying cherry leaves as healthy or afflicted by powdery mildew. Notably, the model's confusion matrix revealed high precision and recall scores for both classes, underscoring its efficacy in distinguishing between healthy and powdery mildew-affected leaves. Additionally, manual testing consistently validated the model's reliability and accuracy. As a result of its robust performance, Version 1 was selected as the preferred model for further deployment and evaluation.
 
-**Version 2** (V2):<br>
+![Model Structure](/readme_images/v1_model.png)
+The model structure of Version 1
+![v1 Accuracy](/outputs/v1/model_training_acc.png)
+Version 1 Learning Curve (Accuracy)
+![v1 Loss](/outputs/v1/model_training_losses.png)
+Version 1 Learning Curve (Loss)
+![v1 Confusion Matrix](/outputs/v1/confusion_matrix.png)
+Version 1 Confusion Matrix
+![v1 Classification Report](/outputs/v1/classification_report.png)
+Version 1 Classification Report
+
+
+### **Version 2** (V2):<br>
 I utilized a model architecture with multiple convolutional and pooling layers, followed by a dense layer and a sigmoid output layer. Despite achieving an impressive accuracy of 99.76% on the validation set during training, signs of overfitting emerged in the learning curve. The model demonstrated a precision of 0.25 and recall of 0.50 on the test set, with an overall accuracy of 0.50. However, manual testing revealed erroneous results, indicating potential overfitting issues that need to be addressed in future iterations. Additionally, it's worth mentioning that the model's structure remains consistent with the first softmax version. Based on these findings, I decided to switch to the softmax version for further experimentation.
 
-**Version 3** (V3):<br>
+![Model Structure](/readme_images/v2_model.png)
+The model structure of Version 2
+![v2 Accuracy](/outputs/v2/model_training_acc.png)
+Version 2 Learning Curve (Accuracy)
+![v2 Loss](/outputs/v2/model_training_losses.png)
+Version 2 Learning Curve (Loss)
+![v2 Confusion Matrix](/outputs/v2/confusion_matrix.png)
+Version 2 Confusion Matrix
+![v2 Classification Report](/outputs/v2/classification_report.png)
+Version 2 Classification Report
+
+### **Version 3** (V3):<br>
 Starting from Version 2, where it was observed that Softmax performed better, I continued to experiment with Softmax variations in subsequent versions to enhance model performance. Here I increased the number of layers and neurons while also raising the dropout rate to 40% for better regularization. Despite achieving a validation accuracy of 99.76% during training, signs of overfitting emerged in the learning curve. Although the model demonstrated high precision and recall on the test set, manual testing revealed occasional errors, indicating potential overfitting issues. Therefore, further investigation into simplifying the model's architecture or implementing stronger regularization techniques was necessary.
 
-**Version 4** (V4):<br>
+![Model Structure](/readme_images/v3_model.png)
+The model structure of Version 3
+![v3 Accuracy](/outputs/v3/model_training_acc.png)
+Version 3 Learning Curve (Accuracy)
+![v3 Loss](/outputs/v3/model_training_losses.png)
+Version 3 Learning Curve (Loss)
+![v3 Confusion Matrix](/outputs/v3/confusion_matrix.png)
+Version 3 Confusion Matrix
+![v3 Classification Report](/outputs/v3/classification_report.png)
+Version 3 Classification Report
+
+### **Version 4** (V4):<br>
 I continued experimenting with different variations of Softmax activation in subsequent versions. In this version, I retained the architecture similar to V3 but switched the optimizer to Adagrad. Despite achieving a validation accuracy of 91.67% during training, signs of overfitting emerged in the learning curve, suggesting that further adjustments might be necessary to improve generalization. The model demonstrated a precision of 0.94 and recall of 0.94 on the test set, with an overall accuracy of 0.94. However, manual testing revealed some discrepancies, indicating potential overfitting issues that need to be addressed in future iterations.
 
-**Version 5** (V5):<br>
+![Model Structure](/readme_images/v4_model.png)
+The model structure of Version 4
+![v4 Accuracy](/outputs/v4/model_training_acc.png)
+Version 4 Learning Curve (Accuracy)
+![v4 Loss](/outputs/v4/model_training_losses.png)
+Version 4 Learning Curve (Loss)
+![v4 Confusion Matrix](/outputs/v4/confusion_matrix.png)
+Version 4 Confusion Matrix
+![v4 Classification Report](/outputs/v4/classification_report.png)
+Version 4 Classification Report
+
+### **Version 5** (V5):<br>
 I adjusted the batch size to 16 and utilized the Adam optimizer in the model architecture. The model retains the same structure as the original version, comprising multiple convolutional and pooling layers followed by a dense layer and a softmax output layer. Notably, the learning curve did not exhibit signs of overfitting. Despite the smaller batch size, the model demonstrated exceptional performance, achieving a validation accuracy of 100% during training. Evaluation on the test set resulted in a remarkable accuracy of 99.88%, with precision, recall, and F1-score all reaching 1.00 for both classes. This indicates robust generalization and excellent performance on unseen data. In spite of this, manual testing revealed erroneous results, suggesting potential issues with generalization or data quality that need to be addressed in future iterations.
 
-**Version 6** (V6):<br>
+![Model Structure](/readme_images/v5_model.png)
+The model structure of Version 5
+![v5 Accuracy](/outputs/v5/model_training_acc.png)
+Version 5 Learning Curve (Accuracy)
+![v5 Loss](/outputs/v5/model_training_losses.png)
+Version 5 Learning Curve (Loss)
+![v5 Confusion Matrix](/outputs/v5/confusion_matrix.png)
+Version 5 Confusion Matrix
+![v5 Classification Report](/outputs/v5/classification_report.png)
+Version 5 Classification Report
+
+### **Version 6** (V6):<br>
 Despite maintaining a similar structure and employing the SGD optimizer with a batch size 16, Version 6 faced challenges. Despite training for 16 epochs, the learning curve displayed signs of overfitting, and manual testing revealed discrepancies in the model's predictions. Though achieving an impressive 99.64% accuracy on the test set, further investigation is needed to address the model's generalization issues observed during manual testing.
 
-**Version 7** (V7):<br>
+![Model Structure](/readme_images/v6_model.png)
+The model structure of Version 6
+![v6 Accuracy](/outputs/v6/model_training_acc.png)
+Version 6 Learning Curve (Accuracy)
+![v6 Loss](/outputs/v6/model_training_losses.png)
+Version 6 Learning Curve (Loss)
+![v6 Confusion Matrix](/outputs/v6/confusion_matrix.png)
+Version 6 Confusion Matrix
+![v6 Classification Report](/outputs/v6/classification_report.png)
+Version 6 Classification Report
+
+### **Version 7** (V7):<br>
 In Version 7, a similar architecture was employed as in the previous model, with the batch size set to 18 and the dropout rate increased by 10%. Training with the SGD optimizer for 21 epochs resulted in a more stable learning curve compared to the previous version. However, manual testing revealed instances of misclassification, suggesting that the model may have learned incorrect patterns.
 
-**Version 8** (V8):<br>
+![Model Structure](/readme_images/v7_model.png)
+The model structure of Version 7
+![v7 Accuracy](/outputs/v7/model_training_acc.png)
+Version 7 Learning Curve (Accuracy)
+![v7 Loss](/outputs/v7/model_training_losses.png)
+Version 7 Learning Curve (Loss)
+![v7 Confusion Matrix](/outputs/v7/confusion_matrix.png)
+Version 7 Confusion Matrix
+![v7 Classification Report](/outputs/v7/classification_report.png)
+Version 5 Classification Report
+
+### **Version 8** (V8):<br>
 Similar to previous models, the structure remained the same, with a batch size of 18 and utilizing the Adam optimizer instead. The dropout rate stayed on 0.4. Although the training curve suggested that the training and validation phases were following each other, they remained relatively distant. Unfortunately, manual testing revealed that the model often misclassified images, indicating that it likely overfitted.
 
-**Version 9** (V9):<br>
+![Model Structure](/readme_images/v8_model.png)
+The model structure of Version 8
+![v8 Accuracy](/outputs/v8/model_training_acc.png)
+Version 8 Learning Curve (Accuracy)
+![v8 Loss](/outputs/v8/model_training_losses.png)
+Version 8 Learning Curve (Loss)
+![v8 Confusion Matrix](/outputs/v8/confusion_matrix.png)
+Version 8 Confusion Matrix
+![v8 Classification Report](/outputs/v8/classification_report.png)
+Version 8 Classification Report
+
+### **Version 9** (V9):<br>
 In this model, I increased the number of neurons, decreased the dropout by 10% (returning to the original value of 0.3), while keeping the batch size at 18. This resulted in a well-distributed training function. While there is some fluctuation in accuracy, it is negligible, and there is excellent alignment in the loss function between the training and validation sets. However, despite these improvements, manual testing still resulted in many misclassifications. Therefore, I decided to stick with the original model, which showed less accurate numbers but demonstrated much higher accuracy during manual testing.
+
+![Model Structure](/readme_images/v9_model.png)
+The model structure of Version 9
+![v9 Accuracy](/outputs/v9/model_training_acc.png)
+Version 9 Learning Curve (Accuracy)
+![v9 Loss](/outputs/v9/model_training_losses.png)
+Version 9 Learning Curve (Loss)
+![v9 Confusion Matrix](/outputs/v9/confusion_matrix.png)
+Version 9 Confusion Matrix
+![v9 Classification Report](/outputs/v9/classification_report.png)
+Version 9 Classification Report
 
 ## Rationale to map the business requirements to the Data Visualizations and ML tasks
 **Business Requirement 1**: Conduct an analysis to visually distinguish between healthy cherry leaves and those affected by powdery mildew.
@@ -154,8 +254,8 @@ In this model, I increased the number of neurons, decreased the dropout by 10% (
 - When loading images into memory for model training, consider their shape to ensure compatibility with performance criteria.
 - Explore various image shape options to strike an optimal balance between model size and performance.
 
-**Business Requirement 3**: Providing a report
-- The client aims to obtain insightful reports summarizing the outcomes of cherry leaf examinations, facilitating informed decision-making and strategic planning.
+**Business Requirement 3**: The client aims to obtain insightful reports summarizing the outcomes of cherry leaf examinations, facilitating informed decision-making and strategic planning.
+
 - Automated Report Generation: Upon the completion of each batch of cherry leaf image analyses, the system automatically generates downloadable .csv reports. These reports succinctly summarize the ML predictions, providing a clear overview of each leaf's predicted health status—whether healthy or affected by powdery mildew.
 - Streamlined Reporting Interface: The reporting functionality is seamlessly integrated into the Streamlit dashboard, ensuring easy access and navigation for the client. This intuitive interface simplifies the process of reviewing and downloading prediction data, enhancing user experience and efficiency.
 - In essence, the report generation feature fulfills the client's need for actionable insights derived from ML predictions. By automating report generation and providing an accessible interface, the client can make informed decisions and implement strategic measures for cherry crop management effectively.
@@ -208,7 +308,7 @@ Some potential actions can be considered:
 
 - **Implementation Strategies**: Investigate strategies for implementing validated hypotheses into practical applications.
 
-- **Decision-Making**:Use validated hypotheses and model predictions to guide decision-making in agriculture.
+- **Decision-Making**: Use validated hypotheses and model predictions to guide decision-making in agriculture.
 
 ## Dashboard Design
 
@@ -294,7 +394,9 @@ By incorporating these ML performance metrics and evaluation results into the pr
 ## CRISP DM Process
 The CRoss Industry Standard Process for Data Mining (CRISP-DM) is a process model that serves as the base for a data science process. It has six sequential phases:
 
-![CRISP-DM Model](/readme_images/CRISP-DM_Process_Diagram.png)
+![CRISP-DM Cycle](/readme_images/CRISP-DM_Process_Diagram.png)
+
+The CRoss Industry Standard Process for Data Mining Cycle
 
 **Business Understanding**( What does the business need?):
 - Project observation:<br>
@@ -346,6 +448,9 @@ Successfully integrated the model into production to support decision-making and
 
 
 By following the CRISP-DM process, the project systematically addressed the business problem of plant disease detection, leveraging data science techniques to deliver actionable insights and deployable solutions for improving agricultural productivity. This process is documented using the [Kanban Board](https://github.com/users/EMPZsolt/projects/3/views/1) provided by GitHub.
+
+![Kanban Board](/readme_images/kanban_board.png)
+The project's kanban board
 
 ## Unfixed Bugs
 There are inaccuracies in image recognition. Certain images of poor quality or unfavorable lighting conditions lead to the model's inability to correctly identify infections. In rare instances, it may even misidentify healthy leaves as infected. Further refinement of the model and enhancements in image quality are necessary to minimize these errors significantly.
