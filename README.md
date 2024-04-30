@@ -9,19 +9,28 @@
 - [Hypothesis and validation](#hypothesis-and-validation)
     - [Hypothesis 1](#hypothesis-1-infected-leaves-have-clear-marks-distinguishing-them-from-healthy-leaves)
     - [Hypothesis 2](#hypothesis-2-mathematical-formulas-comparison)
-- [Rationale for the model](#the-rationale-for-the-model)
+- [Rationale for the model](#rationale-for-the-model)
 - [Trial and error](#trial-and-error--development-and-ml-model-iterations)
+    -[Version 1](#version-1-v1)
+    -[Version 2](#version-2-v2)
+    -[Version 3](#version-3-v3)
+    -[Version 4](#version-4-v4)
+    -[Version 5](#version-5-v5)
+    -[Version 6](#version-6-v6)
+    -[Version 7](#version-7-v7)
+    -[Version 8](#version-8-v8)
+    -[Version 9](#version-9-v9)
 - [Rationale to map the business requirements to the Data Visualizations and ML tasks](#rationale-to-map-the-business-requirements-to-the-data-visualizations-and-ml-tasks)
 - [ML Business case](#ml-business-case)
 - [Conclusion and Potential Course of Actions](#conclusion-and-potential-course-of-actions)
-- [Dashboard design](#dashboard-design-streamlit-app-user-interface)
+- [Dashboard design](#dashboard-design)
     - [Page 1: Quick Project Summary](#page-1-quick-project-summary)
     - [Page 2: Leaf Visualizer](#page-2-leaf-visualizer)
     - [Page 3: Powdery Mildew Detector](#page-3-powdery-mildew-detector)
     - [Page 4: Project Hypothesis and Validation](#page-4-project-hypothesis-and-validation)
     - [Page 5: ML Performance Metrics](#page-5-ml-performance-metrics)
-- [CRISP DM Process](#the-process-of-cross-industry-standard-process-for-data-mining)
-- [Bugs](#bugs)
+- [CRISP DM Process](#crisp-dm-process)
+- [Unfixed Bugs](#unfixed-bugs)
 - [Deployment](#deployment)
     - [Heroku](#heroku)
     - [Fork Repository](#fork-repository)
@@ -85,16 +94,15 @@ To validate the hypothesis, identical models were trained, with the only differe
 Softmax Accuracy
 ![Softmax Losses](/outputs/v1/model_training_losses.png)
 Softmax Losses
-![Sigmoid Accuracy](/outputs/v1/sigmoid_model_training_acc.png)
+![Sigmoid Accuracy](/readme_images/v2_model_training_acc.png)
 Sigmoid Accuracy
-![Sigmoid Losses](/outputs/v1/sigmoid_model_training_losses.png)
+![Sigmoid Losses](/readme_images/v2_model_training_losses.png)
 Sigmoid Losses
 
 - Conclusion:<br>
 Based on the results, the hypothesis was validated, with the softmax function demonstrating superior performance in classifying cherry leaves as healthy or infected with powdery mildew. This highlights the importance of selecting the appropriate activation function based on the nature of the classification problem at hand.
 
 ## Rationale for the model
-
 The model architecture consists of a Sequential model with multiple convolutional layers followed by max-pooling layers for downsampling and a fully connected layer for feature aggregation. The model concludes with an output layer employing the softmax activation function for classification.
 
 **Objective**:<br>
@@ -109,6 +117,9 @@ Output Layer: The model concludes with an output layer containing two neurons, a
 Compilation and Optimization:
 The model is compiled using categorical cross-entropy loss, SGD optimizer, and accuracy as the evaluation metric.
 
+![v1 model](/readme_images/v1_model.png)
+The model for the Version 1
+
 Overall, this model architecture is designed to efficiently process image data, extract relevant features, and classify them accurately, making it suitable for tasks such as identifying powdery mildew in cherry leaves.
 
 ## Trial and Error / Development and ML Model Iterations
@@ -119,12 +130,16 @@ The initial model architecture consisted of a sequence of convolutional and pool
 
 ![Model Structure](/readme_images/v1_model.png)
 The model structure of Version 1
+
 ![v1 Accuracy](/outputs/v1/model_training_acc.png)
 Version 1 Learning Curve (Accuracy)
+
 ![v1 Loss](/outputs/v1/model_training_losses.png)
 Version 1 Learning Curve (Loss)
+
 ![v1 Confusion Matrix](/outputs/v1/confusion_matrix.png)
 Version 1 Confusion Matrix
+
 ![v1 Classification Report](/outputs/v1/classification_report.png)
 Version 1 Classification Report
 
@@ -134,12 +149,16 @@ I utilized a model architecture with multiple convolutional and pooling layers, 
 
 ![Model Structure](/readme_images/v2_model.png)
 The model structure of Version 2
+
 ![v2 Accuracy](/outputs/v2/model_training_acc.png)
 Version 2 Learning Curve (Accuracy)
+
 ![v2 Loss](/outputs/v2/model_training_losses.png)
 Version 2 Learning Curve (Loss)
+
 ![v2 Confusion Matrix](/outputs/v2/confusion_matrix.png)
 Version 2 Confusion Matrix
+
 ![v2 Classification Report](/outputs/v2/classification_report.png)
 Version 2 Classification Report
 
@@ -148,12 +167,16 @@ Starting from Version 2, where it was observed that Softmax performed better, I 
 
 ![Model Structure](/readme_images/v3_model.png)
 The model structure of Version 3
+
 ![v3 Accuracy](/outputs/v3/model_training_acc.png)
 Version 3 Learning Curve (Accuracy)
+
 ![v3 Loss](/outputs/v3/model_training_losses.png)
 Version 3 Learning Curve (Loss)
+
 ![v3 Confusion Matrix](/outputs/v3/confusion_matrix.png)
 Version 3 Confusion Matrix
+
 ![v3 Classification Report](/outputs/v3/classification_report.png)
 Version 3 Classification Report
 
@@ -162,12 +185,16 @@ I continued experimenting with different variations of Softmax activation in sub
 
 ![Model Structure](/readme_images/v4_model.png)
 The model structure of Version 4
+
 ![v4 Accuracy](/outputs/v4/model_training_acc.png)
 Version 4 Learning Curve (Accuracy)
+
 ![v4 Loss](/outputs/v4/model_training_losses.png)
 Version 4 Learning Curve (Loss)
+
 ![v4 Confusion Matrix](/outputs/v4/confusion_matrix.png)
 Version 4 Confusion Matrix
+
 ![v4 Classification Report](/outputs/v4/classification_report.png)
 Version 4 Classification Report
 
@@ -176,12 +203,16 @@ I adjusted the batch size to 16 and utilized the Adam optimizer in the model arc
 
 ![Model Structure](/readme_images/v5_model.png)
 The model structure of Version 5
+
 ![v5 Accuracy](/outputs/v5/model_training_acc.png)
 Version 5 Learning Curve (Accuracy)
+
 ![v5 Loss](/outputs/v5/model_training_losses.png)
 Version 5 Learning Curve (Loss)
+
 ![v5 Confusion Matrix](/outputs/v5/confusion_matrix.png)
 Version 5 Confusion Matrix
+
 ![v5 Classification Report](/outputs/v5/classification_report.png)
 Version 5 Classification Report
 
@@ -190,12 +221,16 @@ Despite maintaining a similar structure and employing the SGD optimizer with a b
 
 ![Model Structure](/readme_images/v6_model.png)
 The model structure of Version 6
+
 ![v6 Accuracy](/outputs/v6/model_training_acc.png)
 Version 6 Learning Curve (Accuracy)
+
 ![v6 Loss](/outputs/v6/model_training_losses.png)
 Version 6 Learning Curve (Loss)
+
 ![v6 Confusion Matrix](/outputs/v6/confusion_matrix.png)
 Version 6 Confusion Matrix
+
 ![v6 Classification Report](/outputs/v6/classification_report.png)
 Version 6 Classification Report
 
@@ -204,12 +239,16 @@ In Version 7, a similar architecture was employed as in the previous model, with
 
 ![Model Structure](/readme_images/v7_model.png)
 The model structure of Version 7
+
 ![v7 Accuracy](/outputs/v7/model_training_acc.png)
 Version 7 Learning Curve (Accuracy)
+
 ![v7 Loss](/outputs/v7/model_training_losses.png)
 Version 7 Learning Curve (Loss)
+
 ![v7 Confusion Matrix](/outputs/v7/confusion_matrix.png)
 Version 7 Confusion Matrix
+
 ![v7 Classification Report](/outputs/v7/classification_report.png)
 Version 5 Classification Report
 
@@ -218,12 +257,16 @@ Similar to previous models, the structure remained the same, with a batch size o
 
 ![Model Structure](/readme_images/v8_model.png)
 The model structure of Version 8
+
 ![v8 Accuracy](/outputs/v8/model_training_acc.png)
 Version 8 Learning Curve (Accuracy)
+
 ![v8 Loss](/outputs/v8/model_training_losses.png)
 Version 8 Learning Curve (Loss)
+
 ![v8 Confusion Matrix](/outputs/v8/confusion_matrix.png)
 Version 8 Confusion Matrix
+
 ![v8 Classification Report](/outputs/v8/classification_report.png)
 Version 8 Classification Report
 
@@ -232,12 +275,16 @@ In this model, I increased the number of neurons, decreased the dropout by 10% (
 
 ![Model Structure](/readme_images/v9_model.png)
 The model structure of Version 9
+
 ![v9 Accuracy](/outputs/v9/model_training_acc.png)
 Version 9 Learning Curve (Accuracy)
+
 ![v9 Loss](/outputs/v9/model_training_losses.png)
 Version 9 Learning Curve (Loss)
+
 ![v9 Confusion Matrix](/outputs/v9/confusion_matrix.png)
 Version 9 Confusion Matrix
+
 ![v9 Classification Report](/outputs/v9/classification_report.png)
 Version 9 Classification Report
 
